@@ -125,7 +125,6 @@ class SendPulseService
             $this->getAccessToken();
         }
 
-
         $url = $this->apiUrl . '/' . $path;
         $method = strtoupper($method);
 
