@@ -1,0 +1,95 @@
+.theme_dark {
+    ul.grid {
+        padding-left: 0;
+        list-style: none;
+        text-align: left;
+        display: inline-block;
+
+        li {
+            background-color: #202122;
+            border-radius: 20px;
+            padding: 1.25rem;
+            margin: 1%;
+            float: left;
+            width: 48%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+            border: none;
+            display: -ms-flexbox !important;
+            display: flex !important;
+            -ms-flex-align: start !important;
+            align-items: flex-start !important;
+            -ms-flex-direction: column !important;
+            flex-direction: column !important;
+
+            div {
+                &:first-child {
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    max-height: 50px;
+                    font-weight: bold;
+                    padding-bottom: 72px;
+                }
+
+                a {
+                    color: inherit;
+                    text-decoration: none;
+                    text-transform: uppercase;
+
+                    &:hover {
+                        color: #fff !important;
+                    }
+                }
+            }
+
+            .btn-edit {
+                bottom: 0px;
+                margin-left: auto;
+                margin-top: auto;
+            }
+        }
+    }
+
+    ul.list {
+        padding-left: 0;
+        list-style: none;
+
+        li {
+            display: -ms-flexbox !important;
+            display: flex !important;
+            -ms-flex-align: center !important;
+            align-items: center !important;
+            flex: 1 1 auto;
+            background-color: #202122;
+            border-radius: 6px;
+            padding: 1.25rem;
+            margin-bottom: .5rem;
+            margin-top: .5rem;
+
+            div {
+                float: left;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                width: 16%;
+                padding-left: 1rem;
+
+                &:first-child {
+                    width: 50%;
+                    padding-left: 0;
+                    padding-right: 1rem;
+                }
+
+                a {
+                    color: inherit;
+                    text-decoration: none;
+
+                    &:hover {
+                        color: #fff !important;
+                    }
+                }
+            }
+        }
+    }
+}

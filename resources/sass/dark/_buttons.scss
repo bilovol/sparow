@@ -1,0 +1,50 @@
+.theme_dark {
+    .btn {
+        color: inherit;
+        background-color: #3A3B3C;
+        border-radius: 6px;
+
+        &:hover {
+            background-color: #4F5051;
+        }
+
+        &:focus, &.focus {
+            outline: 0;
+            box-shadow: none;
+        }
+
+        &.btn-circle {
+            width: 40px;
+            height: 40px;
+            padding: 6px 0px;
+            border-radius: 100%;
+            text-align: center;
+
+            &.active {
+                background-color: #4F5051;
+            }
+        }
+
+        &.btn-edit, &.btn-delete-var {
+            width: 30px;
+            height: 30px;
+            padding: 0px;
+            background-color: unset;
+
+            &:hover {
+                background-color: #3A3B3C;
+            }
+
+            &.active {
+                color: #fff;
+            }
+        }
+
+
+        &.btn-delete-var {
+            width: 100%;
+            height: 100%;
+            float: right !important;
+        }
+    }
+}

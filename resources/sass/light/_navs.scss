@@ -1,0 +1,29 @@
+.theme_light {
+    .navbar {
+        background-color: #fff;
+        border-bottom: none;
+        box-shadow: 0 4px 16px -1px rgba(18, 22, 33, 0.05);
+    }
+
+    .navbar-nav {
+        .nav-item {
+            .nav-link {
+                color: inherit;
+                font-weight: bold !important;
+                border-radius: 6px;
+
+
+                &:hover {
+                    background-color: #eef4ff;
+                    transition: .1s;
+                }
+
+                &.active {
+                    color: #009FC1 !important;
+                }
+            }
+
+
+        }
+    }
+}

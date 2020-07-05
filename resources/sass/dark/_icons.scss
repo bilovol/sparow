@@ -1,0 +1,13 @@
+.theme_dark {
+    .eva-hover {
+        svg {
+            fill: #b0b3b8;
+        }
+    }
+
+    .active > .eva-hover {
+        svg {
+            fill: #fff;
+        }
+    }
+}

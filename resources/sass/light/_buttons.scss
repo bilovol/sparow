@@ -1,0 +1,83 @@
+.theme_light {
+    .btn {
+        color: inherit;
+        background-color: #fff;
+        border-radius: 6px;
+
+        &:hover {
+            background-color: #e4ecfa;
+        }
+
+        &:focus, &.focus {
+            outline: 0;
+            box-shadow: none;
+        }
+
+
+        &.btn-circle {
+            width: 40px;
+            height: 40px;
+            padding: 6px 0px;
+            border-radius: 100%;
+            text-align: center;
+
+            &.active {
+                background-color: #e4ecfa;
+            }
+        }
+
+
+        &.btn-change-user {
+            color: #fff;
+            background-color: #ff5722;
+
+            &:hover {
+                background-color: #d35400;
+            }
+        }
+
+
+        &.btn-delete {
+            color: #ff3d70;
+            background-color: #fff1f7;
+
+            &:hover {
+                background-color: #ffd6e8;
+            }
+        }
+
+        &.btn-edit, &.btn-delete-var {
+            width: 30px;
+            height: 30px;
+            padding: 0px;
+            background-color: unset;
+
+            &:hover {
+                background-color: #eef4ff;
+            }
+
+            &.active {
+                background-color: #eef4ff;
+            }
+        }
+
+        &.btn-save, &.btn-add {
+            color: #fff;
+            background-color: #009FC1;
+
+            &:hover {
+                background-color: #0494b3;
+            }
+
+            &.disabled {
+                background-color: #72b9d2;
+            }
+        }
+
+        &.btn-delete-var {
+            width: 100%;
+            height: 100%;
+            float: right !important;
+        }
+    }
+}

@@ -1,0 +1,52 @@
+.theme_dark {
+    ul.pagination {
+        display: inline-flex;
+
+        li {
+            margin: .25rem;
+
+            &:first-child {
+                margin-left: 0;
+            }
+
+            &:last-child {
+                margin-right: 0;
+            }
+
+            &.active {
+                a {
+                    background-color: #4F5051;
+                    color: #fff;
+                }
+            }
+
+            &.disabled, &.disabled:hover, &.display:visited {
+
+                a {
+                    background-color: #3A3B3C;
+                    opacity: .4;
+                }
+
+            }
+
+
+            a {
+                width: 40px;
+                height: 40px;
+                line-height: 24px;
+                border-radius: 100% !important;
+                text-align: center;
+                background-color: #3A3B3C;
+                color: inherit;
+                border: none;
+
+                &:hover, &:focus {
+                    background-color: #4F5051;
+                    outline: 0;
+                    box-shadow: none;
+                }
+
+            }
+        }
+    }
+}

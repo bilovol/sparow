@@ -1,0 +1,39 @@
+.theme_dark {
+    body {
+        background-color: #18191A;
+        color: #b0b3b8;
+    }
+
+    .text-muted {
+        color: inherit !important;
+        opacity: .6;
+    }
+
+    .delimiter {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        text-align: center;
+    }
+
+    .logo {
+        svg {
+            fill: #E4E6EB;
+        }
+    }
+
+    .avatar {
+        width: 150px;
+        height: 150px;
+        box-sizing: border-box;
+        border: 5px #4F5051 solid;
+        border-radius: 50%;
+        overflow: hidden;
+        margin: 2rem auto 1rem auto;
+
+        img {
+            width: 100%;
+            height: auto;
+        }
+    }
+
+}
