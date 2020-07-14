@@ -145,15 +145,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   middleware: 'auth',
   data: function data() {
     return {
+      apiUrl: window.config.apiUrl,
       automation: [],
+      total: 0,
+      per_page: 1,
       current_page: 1,
-      first_page_url: null,
-      last_page: 1,
-      next_page_url: null,
-      path: null,
-      per_page: null,
-      prev_page_url: null,
-      total: 0
+      pages: 0
     };
   },
   metaInfo: function metaInfo() {
@@ -165,20 +162,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.fetchAutomation();
   },
   methods: {
+    //todo перекинуть на глобальную переменную адрес апи
     fetchAutomation: function fetchAutomation() {
       var _this = this;
 
-      var url = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(url !== null && url !== void 0 ? url : 'api/automation').then(function (response) {
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(page ? this.apiUrl + '/automation?page=' + page : this.apiUrl + '/automation').then(function (response) {
         _this.automation = response.data.data;
-        _this.current_page = response.data.current_page;
-        _this.first_page_url = response.data.first_page_url;
-        _this.last_page = response.data.last_page;
-        _this.next_page_url = response.data.next_page_url;
-        _this.path = response.data.path;
-        _this.per_page = response.data.per_page;
-        _this.prev_page_url = response.data.prev_page_url;
-        _this.total = response.data.total;
+        _this.total = response.data.pagination.total;
+        _this.per_page = response.data.pagination.per_page;
+        _this.current_page = response.data.pagination.current_page;
+        _this.pages = Math.ceil(response.data.pagination.total / response.data.pagination.per_page);
       })["catch"](function (e) {
         console.log(e.response);
       });
@@ -378,7 +372,7 @@ var render = function() {
                         "li",
                         {
                           staticClass: "page-item",
-                          class: { disabled: this.prev_page_url === null }
+                          class: { disabled: this.current_page === 1 }
                         },
                         [
                           _c(
@@ -388,7 +382,9 @@ var render = function() {
                               attrs: { href: "javascript:void(0);" },
                               on: {
                                 click: function($event) {
-                                  return _vm.fetchAutomation(_vm.prev_page_url)
+                                  return _vm.fetchAutomation(
+                                    _vm.current_page - 1
+                                  )
                                 }
                               }
                             },
@@ -397,14 +393,12 @@ var render = function() {
                         ]
                       ),
                       _vm._v(" "),
-                      _vm._l(Math.ceil(this.total / this.per_page), function(
-                        n
-                      ) {
+                      _vm._l(this.pages, function(page) {
                         return _c(
                           "li",
                           {
                             staticClass: "page-item",
-                            class: { active: _vm.current_page === n }
+                            class: { active: _vm.current_page === page }
                           },
                           [
                             _c(
@@ -414,13 +408,11 @@ var render = function() {
                                 attrs: { href: "javascript:void(0);" },
                                 on: {
                                   click: function($event) {
-                                    return _vm.fetchAutomation(
-                                      _vm.path + "?page=" + n
-                                    )
+                                    return _vm.fetchAutomation(page)
                                   }
                                 }
                               },
-                              [_vm._v(_vm._s(n))]
+                              [_vm._v(_vm._s(page))]
                             )
                           ]
                         )
@@ -430,7 +422,7 @@ var render = function() {
                         "li",
                         {
                           staticClass: "page-item",
-                          class: { disabled: this.next_page_url === null }
+                          class: { disabled: _vm.current_page === _vm.pages }
                         },
                         [
                           _c(
@@ -440,7 +432,9 @@ var render = function() {
                               attrs: { href: "javascript:void(0);" },
                               on: {
                                 click: function($event) {
-                                  return _vm.fetchAutomation(_vm.next_page_url)
+                                  return _vm.fetchAutomation(
+                                    _vm.current_page + 1
+                                  )
                                 }
                               }
                             },

@@ -26,5 +26,5 @@ class Automation extends Model
         'meta' => 'array',
     ];
 
-    protected $perPage = 2;
+    protected $perPage = 6;
 }

@@ -36,17 +36,17 @@
             </ul>
             <nav v-if="this.total > this.per_page">
                 <ul class="pagination">
-                    <li class="page-item" :class="{disabled : this.prev_page_url === null}">
+                    <li class="page-item" :class="{disabled : this.current_page === 1}">
                         <a class="page-link" href="javascript:void(0);"
-                           @click="fetchAutomation(prev_page_url)">&laquo;</a>
+                           @click="fetchAutomation(current_page - 1)">&laquo;</a>
                     </li>
-                    <li v-for="n in Math.ceil(this.total / this.per_page)" class="page-item"
-                        :class="{active : current_page === n}">
-                        <a class="page-link" @click="fetchAutomation(path + '?page=' + n)" href="javascript:void(0);">{{n}}</a>
+                    <li v-for="page in this.pages" class="page-item"
+                        :class="{active : current_page === page}">
+                        <a class="page-link" @click="fetchAutomation(page)" href="javascript:void(0);">{{page}}</a>
                     </li>
-                    <li class="page-item" :class="{disabled : this.next_page_url === null}">
+                    <li class="page-item" :class="{disabled : current_page === pages}">
                         <a class="page-link" href="javascript:void(0);"
-                           @click="fetchAutomation(next_page_url)">&raquo</a>
+                           @click="fetchAutomation(current_page + 1)">&raquo</a>
                     </li>
                 </ul>
             </nav>
@@ -81,15 +81,12 @@
         middleware: 'auth',
 
         data: () => ({
+            apiUrl: window.config.apiUrl,
             automation: [],
-            current_page: 1,
-            first_page_url: null,
-            last_page: 1,
-            next_page_url: null,
-            path: null,
-            per_page: null,
-            prev_page_url: null,
             total: 0,
+            per_page: 1,
+            current_page: 1,
+            pages: 0,
         }),
 
         metaInfo() {
@@ -100,22 +97,17 @@
             this.fetchAutomation();
         },
         methods: {
-            fetchAutomation(url = null) {
-                axios.get(url ?? 'api/automation').then(response => {
+            //todo перекинуть на глобальную переменную адрес апи
+            fetchAutomation(page = null) {
+                axios.get(page ? this.apiUrl + '/automation?page=' + page : this.apiUrl + '/automation').then(response => {
                     this.automation = response.data.data;
-                    this.current_page = response.data.current_page;
-                    this.first_page_url = response.data.first_page_url;
-                    this.last_page = response.data.last_page;
-                    this.next_page_url = response.data.next_page_url;
-                    this.path = response.data.path;
-                    this.per_page = response.data.per_page;
-                    this.prev_page_url = response.data.prev_page_url;
-                    this.total = response.data.total;
+                    this.total = response.data.pagination.total;
+                    this.per_page = response.data.pagination.per_page;
+                    this.current_page = response.data.pagination.current_page;
+                    this.pages = Math.ceil(response.data.pagination.total / response.data.pagination.per_page);
                 }).catch(function (e) {
                     console.log(e.response);
                 });
-
-
             },
         }
     }
