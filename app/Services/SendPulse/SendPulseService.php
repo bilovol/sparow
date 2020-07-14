@@ -2,11 +2,13 @@
 
 namespace App\Services\SendPulse;
 
+use App\Exceptions\Api\SendPulseService\UnauthorizedException;
 use App\User;
 use Exception;
 use  \Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class SendPulseService
 {
@@ -66,7 +68,6 @@ class SendPulseService
     private function refreshTokens()
     {
         $this->isRefreshedToken = true;
-
         $data = array(
             'grant_type' => 'refresh_token',
             'client_id' => config('services.sendpulse.client_id'),
@@ -103,7 +104,6 @@ class SendPulseService
         while ($next) {
             $data['offset'] = $i >= 1 ? (100 * $i) : 0;
             $i++;
-
             $response = $this->sendRequest('addressbooks', 'GET', $data)->json();
             if (is_array($response) && count($response) > 0) {
                 $books = array_merge($books, $response);
@@ -117,7 +117,6 @@ class SendPulseService
 
     protected function sendRequest($path, $method = 'GET', $data = array(), $useToken = true)
     {
-
         if ($useToken && empty($this->accessToken)) {
             $this->getAccessToken();
         }
@@ -142,6 +141,9 @@ class SendPulseService
         if ($response->failed() && $response->status() === 401 && !$this->isRefreshedToken) {
             $this->refreshTokens();
             $response = $this->sendRequest($path, $method, $data);
+        } else {
+            Log::alert('update2');
+            throw new UnauthorizedException();
         }
 
         if ($response->serverError() || $response->clientError()) {

@@ -4,13 +4,14 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Services\SendPulse\AutomationService;
+use App\Services\SendPulse\SendPulseService;
 use App\User;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class OAuthController extends Controller
 {
-    public function redirectToLoginForm(AutomationService $sendPulseService)
+    public function redirectToLoginForm(SendPulseService $sendPulseService)
     {
         return $sendPulseService->getLoginFormUrl();
     }
@@ -20,7 +21,7 @@ class OAuthController extends Controller
      * @param AutomationService $sendPulseService
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function handleCallback(Request $request, AutomationService $sendPulseService)
+    public function handleCallback(Request $request, SendPulseService $sendPulseService)
     {
         $sendPulseService->setNewSPUserByCodeAndState($request->code, $request->state);
 

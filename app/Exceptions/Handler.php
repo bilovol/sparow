@@ -2,7 +2,10 @@
 
 namespace App\Exceptions;
 
+use App\Exceptions\Api\SendPulseService\UnauthorizedException;
+use App\Http\Responses\Api\JsonResponse;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpFoundation\Response;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -13,7 +16,7 @@ class Handler extends ExceptionHandler
      * @var array
      */
     protected $dontReport = [
-        //
+        UnauthorizedException::class
     ];
 
     /**
@@ -29,7 +32,7 @@ class Handler extends ExceptionHandler
     /**
      * Report or log an exception.
      *
-     * @param  \Throwable  $exception
+     * @param \Throwable $exception
      * @return void
      *
      * @throws \Exception
@@ -42,14 +45,18 @@ class Handler extends ExceptionHandler
     /**
      * Render an exception into an HTTP response.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Throwable  $exception
+     * @param \Illuminate\Http\Request $request
+     * @param \Throwable $exception
      * @return \Symfony\Component\HttpFoundation\Response
      *
      * @throws \Throwable
      */
     public function render($request, Throwable $exception)
     {
+        if ($exception instanceof UnauthorizedException) {
+            return (new JsonResponse())->setErrorCode(Response::HTTP_LOCKED)->addErrorMessage($exception->getMessage())->setStatusCode(Response::HTTP_LOCKED);
+        }
+
         return parent::render($request, $exception);
     }
 }

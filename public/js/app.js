@@ -50626,10 +50626,24 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.interceptors.response.use(function 
       confirmButtonText: _plugins_i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t('ok'),
       cancelButtonText: _plugins_i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t('cancel')
     }).then(function () {
-      console.log('lofout');
+      console.log('logout');
       _store__WEBPACK_IMPORTED_MODULE_1__["default"].commit('auth/LOGOUT');
       _router__WEBPACK_IMPORTED_MODULE_2__["default"].push({
         name: 'welcome'
+      });
+    });
+  }
+
+  if (status === 423) {
+    sweetalert2__WEBPACK_IMPORTED_MODULE_3___default.a.fire({
+      icon: 'warning',
+      title: _plugins_i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t('sendpulse_expired_alert_title'),
+      text: _plugins_i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t('sendpu_expired_alert_text'),
+      reverseButtons: true,
+      confirmButtonText: _plugins_i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t('connect')
+    }).then(function () {
+      _router__WEBPACK_IMPORTED_MODULE_2__["default"].push({
+        name: 'settings'
       });
     });
   }

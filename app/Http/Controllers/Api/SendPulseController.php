@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Services\SendPulse\AutomationService;
+use App\Http\Controllers\Controller;
 use App\Services\SendPulse\SendPulseService;
 
 class SendPulseController extends Controller

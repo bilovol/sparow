@@ -44,9 +44,21 @@ axios.interceptors.response.use(response => response, error => {
             confirmButtonText: i18n.t('ok'),
             cancelButtonText: i18n.t('cancel')
         }).then(() => {
-            console.log('lofout');
+            console.log('logout');
             store.commit('auth/LOGOUT')
             router.push({name: 'welcome'})
+        })
+    }
+
+    if (status === 423) {
+        Swal.fire({
+            icon: 'warning',
+            title: i18n.t('sendpulse_expired_alert_title'),
+            text: i18n.t('sendpu_expired_alert_text'),
+            reverseButtons: true,
+            confirmButtonText: i18n.t('connect'),
+        }).then(() => {
+            router.push({name: 'settings'})
         })
     }
 

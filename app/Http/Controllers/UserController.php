@@ -14,8 +14,6 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-//        если не получилось подключиться к SP отдаём 400 з сообщением
-//        return response()->json('Cant connect to SP, show notice with btn. click and relocate sp oAUTH2', 400);
         return response()->json($request->user());
     }
 
