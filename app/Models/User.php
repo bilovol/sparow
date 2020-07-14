@@ -1,12 +1,12 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 use Tymon\JWTAuth\Contracts\JWTSubject;
-// todo DEPRECATED
+
 class User extends Authenticatable implements JWTSubject //, MustVerifyEmail
 {
     use Notifiable;

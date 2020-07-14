@@ -1,14 +1,21 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\AutomationController;
 
 Route::group(['middleware' => 'auth:api'], function () {
     Route::apiResource('user', 'UserController')->only(['index', 'store']);
     Route::apiResource('export', 'ExportController@store')->only('store');
     Route::apiResource('source', 'SourceController')->only(['index', 'show']);
-    Route::apiResource('automation', 'AutomationController');
-    Route::get('addressbooks', 'SendPulseController@listAddressBooks');
 
+    Route::get('automation', [AutomationController::class, 'index']);
+    Route::get('automation/{id}', [AutomationController::class, 'show']);
+    Route::post('automation/{id}', [AutomationController::class, 'update']);
+    Route::post('automation', [AutomationController::class, 'store']);
+    Route::delete('automation/{id}', [AutomationController::class, 'destroy']);
+
+
+    Route::get('addressbooks', 'SendPulseController@listAddressBooks');
     Route::post('oauth/sendpulse', 'Auth\OAuthController@redirectToLoginForm');
     Route::get('oauth/sendpulse/callback', 'Auth\OAuthController@handleCallback');
 

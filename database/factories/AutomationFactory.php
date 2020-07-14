@@ -10,8 +10,8 @@ $factory->define(Automation::class, function (Faker $faker) {
         'workflow' => rand(0, 1),
         'meta' => ['book_id' => $faker->randomNumber(), 'post_url' => $faker->url],
         'mapping' => [$faker->randomLetter => $faker->randomLetter],
-        'source' => 'order.create',
         'status' => rand(0, 1),
         'name' => 'My_first_automation ' . $faker->randomNumber(),
+
     ];
 });

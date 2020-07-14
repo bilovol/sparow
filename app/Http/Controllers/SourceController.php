@@ -9,6 +9,7 @@ class SourceController extends Controller
     /**
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
+     * @deprecated // перенести на WebhookService
      */
     public function index(Request $request)
     {

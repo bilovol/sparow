@@ -8,7 +8,6 @@ use  \Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 
-
 class SendPulseService
 {
 
@@ -45,7 +44,6 @@ class SendPulseService
         $this->refreshToken = $value;
     }
 
-
     public function setUserId($value)
     {
         $this->userId = $value;
@@ -60,7 +58,6 @@ class SendPulseService
     private function getAccessToken()
     {
         $this->accessToken = Cache::store($this->tokenStorage)->get($this->userId . ':sp_token');
-
         if (empty($this->accessToken) && $this->refreshToken) {
             $this->refreshTokens();
         }
