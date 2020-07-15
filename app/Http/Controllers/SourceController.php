@@ -2,21 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\DonorService;
+use App\Services\WebhookService;
 use Illuminate\Http\Request;
 
 class SourceController extends Controller
 {
-    /**
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     * @deprecated // перенести на WebhookService
-     */
-    public function index(Request $request)
+    public function index(WebhookService $webhookService)
     {
-        //список всех доступных вебхуков
-        return response()->json([
-            'order.create', 'order.update', 'order.destroy'
-        ]);
+        return $webhookService::getAllowedSource();
     }
 
     public function show(Request $request, $source)

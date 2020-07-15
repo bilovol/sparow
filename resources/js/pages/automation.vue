@@ -1,5 +1,5 @@
 <template>
-    <div class="col-12">
+    <div class="col-md-10">
         <div class="d-flex align-items-center pb-3 pb-md-5">
             <div class="mr-auto">
                 <h4 class="d-inline-block m-0">Автоматизация</h4>
@@ -22,7 +22,7 @@
                         <span>{{$t(item.source)}}</span>
                     </div>
                     <div class="info">
-                        <span>{{item.workflow === 0 ? $t('export'): $t('POST URL') }}</span>
+                        <span>{{$t(item.workflow )}}</span>
                     </div>
                     <div class="info">
                         <span>{{ item.status === 1 ? $t('active') : $t('disable') }}</span>

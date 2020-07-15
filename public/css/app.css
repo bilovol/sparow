@@ -11083,6 +11083,7 @@ a.text-dark:focus {
   list-style: none;
   text-align: left;
   display: inline-block;
+  width: 100%;
 }
 
 .theme_light ul.grid li {
@@ -11364,6 +11365,7 @@ a.text-dark:focus {
   list-style: none;
   text-align: left;
   display: inline-block;
+  width: 100%;
 }
 
 .theme_dark ul.grid li {

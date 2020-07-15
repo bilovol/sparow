@@ -251,7 +251,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "col-12" }, [
+  return _c("div", { staticClass: "col-md-10" }, [
     _c(
       "div",
       { staticClass: "d-flex align-items-center pb-3 pb-md-5" },
@@ -317,15 +317,7 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "info" }, [
-                      _c("span", [
-                        _vm._v(
-                          _vm._s(
-                            item.workflow === 0
-                              ? _vm.$t("export")
-                              : _vm.$t("POST URL")
-                          )
-                        )
-                      ])
+                      _c("span", [_vm._v(_vm._s(_vm.$t(item.workflow)))])
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "info" }, [
