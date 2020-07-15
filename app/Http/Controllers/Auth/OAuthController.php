@@ -3,9 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Services\SendPulse\AutomationService;
+use App\Repositories\UserRepository;
 use App\Services\SendPulse\SendPulseService;
-use App\User;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
@@ -18,16 +17,16 @@ class OAuthController extends Controller
 
     /**
      * @param Request $request
-     * @param AutomationService $sendPulseService
+     * @param SendPulseService $sendPulseService
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function handleCallback(Request $request, SendPulseService $sendPulseService)
+    public function handleCallback(Request $request, SendPulseService $sendPulseService, UserRepository $userRepository)
     {
-        $sendPulseService->setNewSPUserByCodeAndState($request->code, $request->state);
+        $sendPulseService->setTokensByCodeAndState($request->code, $request->state);
 
         return view('oauth/callback',
             [
-                'token' => JWTAuth::fromUser(User::findOrFail(1)),
+                'token' => JWTAuth::fromUser($userRepository->get($sendPulseService->getUserId())),
             ]);
     }
 }
