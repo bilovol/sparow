@@ -34,9 +34,8 @@ class AutomationController extends Controller
 
     public function store(StoreRequest $request, AutomationService $automationService)
     {
-        return response(new AutomationResource($automationService->create($request)));
+        return $this->response(new AutomationResource($automationService->create($request)));
     }
-
 
     public function update($id, StoreRequest $request, AutomationService $automationService)
     {

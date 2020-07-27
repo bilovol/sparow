@@ -12,21 +12,20 @@
             <ul class="navbar-nav">
                 <li class="nav-item mr-2">
                     <router-link :to="{ name: 'automation' }" class="nav-link" active-class="active">
-                        Автоматизация
+                        {{ $t('Automation') }}
                     </router-link>
                 </li>
                 <li class="nav-item">
                     <router-link :to="{ name: 'export' }" class="nav-link" active-class="active">
-                        export
+                        {{ $t('Export') }}
                     </router-link>
                 </li>
             </ul>
         </div>
-
         <div class="w-50">
             <ul class="navbar-nav ml-md-auto float-right">
                 <li class="nav-item d-none d-lg-inline-block mr-2">
-                <span class="user-email" style="line-height: 40px;">
+                <span v-if="user.sp_user_info" class="user-email" style="line-height: 40px;">
                       {{user.sp_user_info.email}}
                 </span>
                 </li>
@@ -38,7 +37,6 @@
                 <switch-theme></switch-theme>
             </ul>
         </div>
-
     </nav>
 </template>
 

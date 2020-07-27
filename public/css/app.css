@@ -10939,8 +10939,8 @@ a.text-dark:focus {
 }
 
 .theme_light .delimiter {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  padding-top: 3px;
+  padding-bottom: 3px;
   text-align: center;
 }
 
@@ -11049,6 +11049,14 @@ a.text-dark:focus {
   float: right !important;
 }
 
+.theme_light .btn.btn-add-var {
+  background-color: #e4ecfa;
+}
+
+.theme_light .btn.btn-add-var:hover {
+  background-color: #d2dcef;
+}
+
 .theme_light .eva-hover svg {
   fill: #46607d;
 }
@@ -11110,12 +11118,12 @@ a.text-dark:focus {
   max-height: 50px;
   font-weight: bold;
   padding-bottom: 72px;
+  width: 100%;
 }
 
 .theme_light ul.grid li div a {
   color: inherit;
   text-decoration: none;
-  text-transform: uppercase;
 }
 
 .theme_light ul.grid li div a:hover {
@@ -11235,14 +11243,29 @@ a.text-dark:focus {
   border-radius: 100%;
   text-align: center;
   display: inline-block;
+  z-index: 999;
 }
 
 .theme_light hr {
   border-top: 1px solid #e4ecfa;
 }
 
+.theme_light .badge-spill-notice {
+  position: relative;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  background-color: #eef3fc;
+  margin-left: -0.72rem;
+  z-index: 99;
+  padding: 0 1rem;
+}
+
 .theme_light .structure-block {
   background-color: #dae3f2;
+}
+
+.theme_light .swal2-styled.swal2-confirm {
+  background-color: #009FC1;
 }
 
 .theme_dark body {
@@ -11256,8 +11279,8 @@ a.text-dark:focus {
 }
 
 .theme_dark .delimiter {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  padding-top: 3px;
+  padding-bottom: 3px;
   text-align: center;
 }
 
@@ -11391,12 +11414,12 @@ a.text-dark:focus {
   max-height: 50px;
   font-weight: bold;
   padding-bottom: 72px;
+  width: 100%;
 }
 
 .theme_dark ul.grid li div a {
   color: inherit;
   text-decoration: none;
-  text-transform: uppercase;
 }
 
 .theme_dark ul.grid li div a:hover {
@@ -11508,10 +11531,21 @@ a.text-dark:focus {
   border-radius: 100%;
   text-align: center;
   display: inline-block;
+  z-index: 999;
 }
 
 .theme_dark hr {
   border-top: 1px solid #3E4042;
+}
+
+.theme_dark .badge-spill-notice {
+  position: relative;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  background-color: #3a3b3c;
+  margin-left: -0.72rem;
+  z-index: 99;
+  padding: 0 1rem;
 }
 
 .theme_dark .form-control {
@@ -11528,5 +11562,9 @@ a.text-dark:focus {
 
 .theme_dark .structure-block {
   background-color: #26292b;
+}
+
+.theme_dark .swal2-styled.swal2-confirm {
+  background-color: #009FC1;
 }
 

@@ -25,7 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('sp_refresh_token', 1200)->nullable();// тут храним ререш к SP
             $table->json('sp_user_info')->nullable();// тут храним инфо о SP USER
 
-            $table->integer('status'); //0-disable, 1-active
+            $table->integer('status')->default(1); //0-disable, 1-active
 
             $table->string('lang')->default('en');
             $table->timestamps();

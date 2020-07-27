@@ -23,8 +23,14 @@ class WebhookRepository extends BaseRepository
         return $this->model->where('id', $id)->where('user_id', 1)->firstOrFail($columns);
     }
 
-    public function getBySource($source, array $columns = ['*'])
+    public function getByEventAndUserId($event, $userId, array $columns = ['*'])
     {
-        return $this->model->where('user_id', 1)->where('source_tag', $source)->first($columns);
+        return $this->model->where('user_id', $userId)->where('event', $event)->first($columns);
     }
+
+    public function getByUserId($userId)
+    {
+        return $this->model->where('user_id', $userId)->get();
+    }
+
 }

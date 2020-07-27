@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     'api' => [
         'url' => env('SENDPULSE_API_URL', 'https://api.sendpulse.com'),
         'token' => [
@@ -14,6 +13,4 @@ return [
         'storage' => env('SENDPULSE_CACHE_STORAGE', 'redis'),
         'ttl' => env('SENDPULSE_CACHE_STORAGE_TTL', 300),
     ]
-
-
 ];

@@ -15,6 +15,6 @@ class UserRepository extends BaseRepository
 
     public function getByDonorId($donorId, $columns = ['*'])
     {
-        $this->model->where('donor_id', $donorId)->firstOrFail($columns);
+       return $this->model->where('donor_id', $donorId)->firstOrFail($columns);
     }
 }

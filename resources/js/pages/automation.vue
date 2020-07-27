@@ -2,11 +2,14 @@
     <div class="col-md-10">
         <div class="d-flex align-items-center pb-3 pb-md-5">
             <div class="mr-auto">
-                <h4 class="d-inline-block m-0">Автоматизация</h4>
+                <h4 class="d-inline-block m-0">
+                    {{ $t('Automation') }}
+                </h4>
             </div>
-            <router-link tag="button" :to="{ name: 'automation-edit', params: { id: 'new' }}"
+            <router-link v-if="automation.length > 0" tag="button"
+                         :to="{ name: 'automation-edit', params: { id: 'new' }}"
                          class="btn float-right">
-                Добавить новую
+                {{ $t('Add new') }}
             </router-link>
         </div>
         <div v-if="automation.length > 0">
@@ -19,10 +22,10 @@
                         </router-link>
                     </div>
                     <div class="info">
-                        <span>{{$t(item.source)}}</span>
+                        <span>{{$t(item.event)}}</span>
                     </div>
                     <div class="info">
-                        <span>{{$t(item.workflow )}}</span>
+                        <span>{{$t(item.workflow)}}</span>
                     </div>
                     <div class="info">
                         <span>{{ item.status === 1 ? $t('active') : $t('disable') }}</span>
@@ -54,11 +57,11 @@
 
         <div v-else class="card">
             <div class="card-body text-center">
-                <h4>Empty automation</h4>
-                <p class="pb-5">Автоматизируйте работу Вашего магазина</p>
+                <h4>{{$t("We couldn't find any data")}}</h4>
+                <p class="pb-5">{{$t('Automate routine work')}}</p>
                 <router-link tag="button" :to="{ name: 'automation-edit', params: { id: 'new' }}"
                              class="btn btn-add">
-                    Добавить новую
+                    {{ $t('Create new One') }}
                 </router-link>
             </div>
         </div>
@@ -90,14 +93,13 @@
         }),
 
         metaInfo() {
-            return {title: this.$t('automation')}
+            return {title: this.$t('Automation')}
         },
 
         created() {
             this.fetchAutomation();
         },
         methods: {
-            //todo перекинуть на глобальную переменную адрес апи
             fetchAutomation(page = null) {
                 axios.get(page ? this.apiUrl + '/automation?page=' + page : this.apiUrl + '/automation').then(response => {
                     this.automation = response.data.data;

@@ -2,14 +2,14 @@
     <div class="col-md-8">
         <div class="card">
             <div class="card-body text-center">
-                <div class="avatar">
+                <div v-if="user.sp_user_info" class="avatar">
                     <img :src='user.photo_url' :alt="user.sp_user_info.email">
                 </div>
 
-                <h4>
+                <h4 v-if="user.sp_user_info">
                     <span class="badge badge-main">{{user.sp_user_info.name}}</span>
                 </h4>
-                <div>
+                <div v-if="user.sp_user_info">
                     <span class="badge">User ID: {{user.sp_user_info.id}}</span>
                     |
                     <span class="badge">EMAIL: {{user.sp_user_info.email}}</span>

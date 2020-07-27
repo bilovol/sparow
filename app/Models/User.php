@@ -11,15 +11,14 @@ class User extends Authenticatable implements JWTSubject //, MustVerifyEmail
 {
     use Notifiable;
 
-    protected $fillable = ['id', 'donor_info', 'sp_user_info', 'lang'];
-    protected $hidden = ['donor_id', 'donor_access', 'sp_refresh_token', 'status', 'updated_at'];
+    protected $fillable = ['id', 'donor_id', 'donor_access', 'sp_refresh_token', 'status', 'donor_info', 'sp_user_info', 'lang'];
     protected $casts = [
         'donor_access' => 'array',
         'donor_info' => 'array',
         'sp_user_info' => 'array',
     ];
 
-    protected $appends = ['photo_url', 'is_sp_connect'];
+    protected $appends = ['photo_url'];
 
     /**
      * Get the profile photo URL attribute.
@@ -29,12 +28,6 @@ class User extends Authenticatable implements JWTSubject //, MustVerifyEmail
     public function getPhotoUrlAttribute()
     {
         return 'https://www.gravatar.com/avatar/' . md5(strtolower($this->sp_user_info['email'] ?? 'undefined')) . '.jpg?s=180&default=mp';
-    }
-
-
-    public function getIsSpConnectAttribute()
-    {
-        return !empty($this->sp_refresh_token);
     }
 
     /**

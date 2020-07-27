@@ -99,6 +99,18 @@ return [
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
         ],
+
+
+        'telegram' => [
+            'driver' => 'monolog',
+            'handler' => \App\Services\Logging\TelegramHandler::class,
+            'formatter' => \App\Services\Logging\TelegramFormatter::class,
+            'handler_with' => [
+                'token' => env('TELEGRAM_TOKEN', '981532100:AAH8kKyPQHfPiNiZJgGeHhfoMwmc48Dk7jA'),
+                'channel' => env('TELEGRAM_CHANEL', '-1001435093737'),
+                'level' => env('TELEGRAM_LEVEL', 'debug'),
+            ],
+        ],
     ],
 
 ];

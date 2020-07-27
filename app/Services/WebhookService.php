@@ -2,14 +2,11 @@
 
 namespace App\Services;
 
-use App\Repositories\AutomationRepository;
 use App\Repositories\WebhookRepository;
+use App\Services\Donor\DonorService;
 use App\User;
-use Exception;
-use  \Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Log;
 
 class WebhookService
 {
@@ -23,40 +20,17 @@ class WebhookService
         $this->webhookRepository = $webhookRepository;
     }
 
-    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-    /**
-     * @return array
-     */
-    public static function getAllowedSource(): array
+    public function getIdByEvent($event)
     {
-        return array_keys(config('donor.source_of_object', []));
-    }
-
-    /**
-     * Путь к ид обьекта
-     * @param $source
-     * @return \Illuminate\Config\Repository|\Illuminate\Contracts\Foundation\Application|mixed
-     */
-    public static function getMapObjectIdBySource($source)
-    {
-        return config('donor.object_id_way.' . $source);
-    }
-
-//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    public function getIdBySource($source)
-    {
-        $webhook = $this->webhookRepository->getBySource($source, ['id']);
-        $meta = [];
-
+        $webhook = $this->webhookRepository->getByEventAndUserId($event, Auth::user()->id, ['id']);
         if (empty($webhook->id)) {
             $hash = md5(microtime(true) . microtime(true));
-
-            //todo register new webhook from DonorService return $meta;
+            $meta = app(DonorService::class)->bindWebhookByEvent($event, $hash);
 
             $webhook = $this->webhookRepository->create([
                 'user_id' => Auth::user()->id,
-                'source_tag' => $source,
+                'event' => $event,
                 'hash' => $hash,
                 'meta' => $meta,
                 'status' => self::STATUS_ACTIVE
@@ -70,8 +44,6 @@ class WebhookService
 
     public function delete($id)
     {
-        //todo delete by donor
-
         return $this->webhookRepository->delete($id);
     }
 }

@@ -7,6 +7,9 @@
                 SendPulse
             </h1>
         </div>
+        <div class="text-center" style="position: absolute; bottom: 10px;">
+            from SendPulse
+        </div>
     </div>
 </template>
 

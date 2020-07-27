@@ -1,42 +1,44 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\Auth\OAuthController;
 use App\Http\Controllers\Api\AutomationController;
 use App\Http\Controllers\Api\SendPulseController;
+use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\ExportController;
+use App\Http\Controllers\Api\EventController;
+use App\Http\Controllers\Api\ObjectController;
 
 Route::group(['middleware' => 'auth:api'], function () {
-    Route::apiResource('user', 'UserController')->only(['index', 'store']);
-    Route::apiResource('export', 'ExportController@store')->only('store');
-    Route::apiResource('source', 'SourceController')->only(['index', 'show']);
+    Route::get('user', [UserController::class, 'index']);
+    Route::post('user', [UserController::class, 'store']);
+
+    Route::post('export', [ExportController::class, 'store']);
+
+    Route::get('event', [EventController::class, 'index']);
+    Route::get('event/{event}/fields', [EventController::class, 'show']);
+
+    Route::get('object', [ObjectController::class, 'index']);
+    Route::get('object/{object}/fields', [ObjectController::class, 'show']);
+    Route::post('export', [ExportController::class, 'store']);
 
     Route::get('automation', [AutomationController::class, 'index']);
     Route::get('automation/{id}', [AutomationController::class, 'show']);
+    Route::post('automation/new', [AutomationController::class, 'store']);
     Route::post('automation/{id}', [AutomationController::class, 'update']);
     Route::post('automation', [AutomationController::class, 'store']);
     Route::delete('automation/{id}', [AutomationController::class, 'destroy']);
 
-
     Route::get('addressbooks', [SendPulseController::class, 'listAddressBooks']);
-    Route::post('oauth/sendpulse', 'Auth\OAuthController@redirectToLoginForm');
-    Route::get('oauth/sendpulse/callback', 'Auth\OAuthController@handleCallback');
 
+    Route::post('oauth/sendpulse', [OAuthController::class, 'redirectToLoginForm']);
+    Route::get('oauth/sendpulse/callback', [OAuthController::class, 'handleCallback']);
 });
 
+Route::post('/uninstall', [OAuthController::class, 'uninstall']);
 Route::group(['middleware' => 'guest:api'], function () {
-    // todo установки приложение и т.д.
-    Route::get('point', 'HomeController@index');
-//    Route::get('oauth/sendpulse/callback', 'Auth\OAuthController@handleCallback');
-
-//    Route::post('login', 'Auth\LoginController@login');
-//    Route::post('register', 'Auth\RegisterController@register');
-//
-//    Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
-//    Route::post('password/reset', 'Auth\ResetPasswordController@reset');
-//
-//    Route::post('email/verify/{user}', 'Auth\VerificationController@verify')->name('verification.verify');
-//    Route::post('email/resend', 'Auth\VerificationController@resend');
-//
-//    Route::post('oauth/{driver}', 'Auth\OAuthController@redirectToProvider');
-//    Route::get('oauth/{driver}/callback', 'Auth\OAuthController@handleProviderCallback')->name('oauth.callback');
+    Route::match(['get', 'post'], '/install', [OAuthController::class, 'install']);
+    Route::match(['get', 'post'], '/login', [OAuthController::class, 'login']);
 });
 

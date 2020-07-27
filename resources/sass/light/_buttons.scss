@@ -79,5 +79,15 @@
             height: 100%;
             float: right !important;
         }
+
+        &.btn-add-var {
+            background-color: #e4ecfa;
+
+            &:hover {
+                background-color: #d2dcef;
+            }
+
+        }
+
     }
 }

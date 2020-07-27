@@ -6,6 +6,7 @@ use App\Exceptions\Api\SendPulseService\UnauthorizedException;
 use App\Http\Responses\Api\JsonResponse;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -16,7 +17,8 @@ class Handler extends ExceptionHandler
      * @var array
      */
     protected $dontReport = [
-        UnauthorizedException::class
+        UnauthorizedException::class,
+        NotFoundHttpException::class
     ];
 
     /**

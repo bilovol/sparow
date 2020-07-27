@@ -19,7 +19,7 @@ class CreateWebhooksTable extends Migration
         Schema::create($this->table, function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-            $table->string('source_tag');//user.create user.update order.create
+            $table->string('event');//user.create user.update order.create
             $table->string('hash');
             $table->integer('status')->default(1);
             $table->json('meta')->nullable();

@@ -1,121 +1,13 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[6],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/export.vue?vue&type=script&lang=js&":
-/*!************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/export.vue?vue&type=script&lang=js& ***!
-  \************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ "./resources/js/lang/en.json":
+/*!***********************************!*\
+  !*** ./resources/js/lang/en.json ***!
+  \***********************************/
+/*! exports provided: Ok, Cancel, Oops, Something went wrong! Please try again later, Session Expired, Please log in again to continue, Resource is not found, Page Not Found, Automation, Add new, Delete, Create new One, We couldn't find any data, Automate routine work, Connect SendPulse user, When changing user, some of the automation may stop working, Export, Event, An event in your system to track, Workflow, Choose, Address book, Address Book to which data will be exported, POST URL event in A360 SendPulse, Select address book, Input POST URL, Must have email or phone, Must have email and phone, Are you sure?, Yes delete!, Please connect a user, Connect, Saved, Save, My automation, Input var name, Add variable, Add structure, Name, Status, Validation error, export, post, active, disable, order_create, order_update, order_delete, default */
+/***/ (function(module) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  middleware: 'auth',
-  metaInfo: function metaInfo() {
-    return {
-      title: this.$t('export')
-    };
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/export.vue?vue&type=template&id=3261905d&":
-/*!****************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/export.vue?vue&type=template&id=3261905d& ***!
-  \****************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("\n    export\n")])
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./resources/js/pages/export.vue":
-/*!***************************************!*\
-  !*** ./resources/js/pages/export.vue ***!
-  \***************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _export_vue_vue_type_template_id_3261905d___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./export.vue?vue&type=template&id=3261905d& */ "./resources/js/pages/export.vue?vue&type=template&id=3261905d&");
-/* harmony import */ var _export_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./export.vue?vue&type=script&lang=js& */ "./resources/js/pages/export.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _export_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _export_vue_vue_type_template_id_3261905d___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _export_vue_vue_type_template_id_3261905d___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/pages/export.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/pages/export.vue?vue&type=script&lang=js&":
-/*!****************************************************************!*\
-  !*** ./resources/js/pages/export.vue?vue&type=script&lang=js& ***!
-  \****************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_export_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./export.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/export.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_export_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/pages/export.vue?vue&type=template&id=3261905d&":
-/*!**********************************************************************!*\
-  !*** ./resources/js/pages/export.vue?vue&type=template&id=3261905d& ***!
-  \**********************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_export_vue_vue_type_template_id_3261905d___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./export.vue?vue&type=template&id=3261905d& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/export.vue?vue&type=template&id=3261905d&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_export_vue_vue_type_template_id_3261905d___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_export_vue_vue_type_template_id_3261905d___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
+module.exports = JSON.parse("{\"Ok\":\"Ok\",\"Cancel\":\"Cancel\",\"Oops\":\"Oops...\",\"Something went wrong! Please try again later\":\"Something went wrong! Please try again later\",\"Session Expired\":\"Session Expired!\",\"Please log in again to continue\":\"Please log in again to continue\",\"Resource is not found\":\"Resource is not found\",\"Page Not Found\":\"Page Not Found\",\"Automation\":\"Automation\",\"Add new\":\"Add new\",\"Delete\":\"Delete\",\"Create new One\":\"Create new One\",\"We couldn't find any data\":\"We couldn't find any data\",\"Automate routine work\":\"Automate routine work\",\"Connect SendPulse user\":\"Connect SendPulse user\",\"When changing user, some of the automation may stop working\":\"When changing user, some of the automation may stop working\",\"Export\":\"Export\",\"Event\":\"Event\",\"An event in your system to track\":\"An event in your system to track\",\"Workflow\":\"Workflow\",\"Choose\":\"Choose\",\"Address book\":\"Address book\",\"Address Book to which data will be exported\":\"Address Book to which data will be exported\",\"POST URL event in A360 SendPulse\":\"POST URL event in A360 SendPulse\",\"Select address book\":\"Select address book\",\"Input POST URL\":\"Input POST URL\",\"Must have email or phone\":\"Must have email OR phone\",\"Must have email and phone\":\"Must have email AND phone\",\"Are you sure?\":\"Are you sure?\",\"Yes delete!\":\"Yes delete!\",\"Please connect a user\":\"Please connect a user\",\"Connect\":\"Connect\",\"Saved\":\"Saved\",\"Save\":\"Save\",\"My automation\":\"My automation\",\"Input var name\":\"Input var name\",\"Add variable\":\"Add variable\",\"Add structure\":\"Add structure\",\"Name\":\"Name\",\"Status\":\"Status\",\"Validation error\":\"Validation error\",\"export\":\"Export\",\"post\":\"A360\",\"active\":\"Active\",\"disable\":\"Disable\",\"order_create\":\"Order create\",\"order_update\":\"Order update\",\"order_delete\":\"Order delete\"}");
 
 /***/ })
 

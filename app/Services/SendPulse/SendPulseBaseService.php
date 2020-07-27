@@ -4,11 +4,12 @@ namespace App\Services\SendPulse;
 
 use App\Repositories\UserRepository;
 use Exception;
+use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use App\Exceptions\Api\SendPulseService\UnauthorizedException;
-use Illuminate\Support\Facades\Log;
+use Psr\SimpleCache\InvalidArgumentException;
 
 abstract class SendPulseBaseService
 {
@@ -29,6 +30,7 @@ abstract class SendPulseBaseService
     protected $clientSecret;
     protected $redirectUri;
 
+    protected $repository;
 
     protected $isRefreshedToken = false;
 
@@ -44,6 +46,7 @@ abstract class SendPulseBaseService
         $this->redirectUri = config('services.sendpulse.redirect_uri');
 
         $this->userIdResolve();
+        $this->setRepository();
     }
 
 
@@ -52,19 +55,21 @@ abstract class SendPulseBaseService
         return microtime(true);
     }
 
+    public function setRepository()
+    {
+        return $this->repository = $this->repository ?? (new UserRepository());
+    }
 
     /**
-     * @throws Exception
+     * @throws Exception|InvalidArgumentException
      */
     private function getNewAccessToken()
     {
-        Log::info('getNewAccessToken');
+        $this->refreshToken = $this->getRefreshToken();
         if (null === $this->clientId) {
             throw new Exception('clientId not found, you must check config services.sendpulse.client_id');
         } elseif (null === $this->clientSecret) {
             throw new Exception('clientSecret not found, you must check config services.sendpulse.client_secret');
-        } elseif (null === $this->refreshToken) {
-            throw new Exception('refreshToken not found, you must call setRefreshToken method before');
         }
 
         $this->isRefreshedToken = true;
@@ -111,41 +116,25 @@ abstract class SendPulseBaseService
         $this->setUserId(Auth::user()->id);
     }
 
+    public function getRefreshToken()
+    {
+        return Auth::user()->sp_refresh_token;
+    }
+
     public function userIdResolveByState($state)
     {
         $this->userId = Cache::store($this->cacheStorage)->get($state);
     }
 
-    public function refreshTokenResolve()
-    {
-        if (empty($this->refreshToken)) {
-            $this->setRefreshToken(Auth::user()->sp_refresh_token);
-        }
-    }
-
     /**
-     * @throws Exception
+     * @param string $refreshToken
+     * @throws InvalidArgumentException
+     * @throws UnauthorizedException
      */
-    private function accessTokenResolve()
+    public function saveRefreshToken(string $refreshToken)
     {
-        $storage = Cache::store($this->tokenStorage);
-        $storageKey = $this->userId . ':sp_token';
-
-        if (empty($this->accessToken)) {
-            if ($storage->has($storageKey)) {
-                $this->setAccessToken($storage->get($storageKey));
-            } else {
-                $this->getNewAccessToken();
-                $this->saveRefreshToken($this->refreshToken);
-            }
-        }
-    }
-
-    public function saveRefreshToken($refreshToken)
-    {
-        Log::info('saveRefreshToken');
-        $user = (new UserRepository())->get($this->userId);
-        $user->sp_refresh_token = $refreshToken;
+        $user = $this->repository->get($this->userId);
+        $user->sp_refresh_token = $refreshToken; //todo ТУТ
 
         $user->sp_user_info = $this->getUserInfo();
 
@@ -157,14 +146,19 @@ abstract class SendPulseBaseService
      * @param string $method
      * @param array $data
      * @param bool $useToken
-     * @return mixed
-     * @throws UnauthorizedException|Exception
+     * @return Response|mixed
+     * @throws UnauthorizedException
+     * @throws InvalidArgumentException|Exception
      */
     protected function executeRequest($path, $method = 'GET', $data = array(), $useToken = true)
     {
         if ($useToken) {
-            $this->refreshTokenResolve();
-            $this->accessTokenResolve();
+            $this->accessToken = $this->accessToken ?? Cache::store($this->tokenStorage)->get($this->userId . ':sp_access_token');
+            $this->refreshToken = $this->refreshToken ?? $this->getRefreshToken();
+            if (empty($this->accessToken)) {
+                $this->getNewAccessToken();
+                $this->saveRefreshToken($this->refreshToken);
+            }
         }
 
         $url = $this->apiUrl . $path;
@@ -184,28 +178,29 @@ abstract class SendPulseBaseService
                 $response = $useToken ? Http::withToken($this->accessToken)->get($url, $data) : Http::get($url, $data);
         }
 
-        if ($response->status() === 401 && !$this->isRefreshedToken) {
-            $this->accessTokenResolve();
-            $response = $this->executeRequest($path, $method, $data);
+        if ($response->clientError()) {
+            switch (true) {
+                case $response->status() === 401 && !$this->isRefreshedToken:
+                    $this->getNewAccessToken();
+                    $this->saveRefreshToken($this->refreshToken);
+                    $response = $this->executeRequest($path, $method, $data);
+                    break;
+                case $response->status() === 401 || $response->status() === 400 && !$this->refreshToken:
+                    throw new UnauthorizedException();
+                    break;
+                default:
+                    throw new Exception($method . ':' . $path . ' | status: ' . $response->status() . ' | response: ' . $response->body());
+            }
         }
 
-
-        if ($response->status() === 401 && !$this->isRefreshedToken) {
-
-        } elseif ($response->status() === 401) {
-            throw new UnauthorizedException();
-        }
-
-        if ($response->serverError() || $response->clientError()) {
-            throw new Exception($method . ':' . $path . ' | status: ' . $response->status() . ' | response: ' . $response->body());
-        }
 
         return $response;
     }
 
     /**
-     * @return mixed
+     * @return array
      * @throws UnauthorizedException
+     * @throws InvalidArgumentException/Exception
      */
     public function getUserInfo()
     {
@@ -214,7 +209,7 @@ abstract class SendPulseBaseService
 
     /**
      * @return mixed
-     * @throws UnauthorizedException
+     * @throws UnauthorizedException|Exception
      */
     public function listAddressBooks()
     {
@@ -235,6 +230,10 @@ abstract class SendPulseBaseService
         return $books;
     }
 
+    /**
+     * @return string[]
+     * @throws Exception
+     */
     public function getLoginFormUrl()
     {
         if (null === $this->clientSecret) {
@@ -253,6 +252,11 @@ abstract class SendPulseBaseService
         ];
     }
 
+    /**
+     * @param $code
+     * @param $state
+     * @throws UnauthorizedException|Exception
+     */
     public function setTokensByCodeAndState($code, $state)
     {
         $this->userIdResolveByState($state);

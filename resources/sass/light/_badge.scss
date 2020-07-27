@@ -7,9 +7,20 @@
         border-radius: 100%;
         text-align: center;
         display: inline-block;
+        z-index: 999;
     }
 
     hr {
         border-top: 1px solid #e4ecfa;
+    }
+
+    .badge-spill-notice {
+        position: relative;
+        border: 1px solid transparent;
+        border-radius: 0.25rem;
+        background-color: #eef3fc;
+        margin-left: -0.72rem;
+        z-index: 99;
+        padding: 0 1rem;
     }
 }

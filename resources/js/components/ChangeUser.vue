@@ -1,10 +1,8 @@
 <template>
     <div class="text-center pt-3">
-        <button class="btn btn-change-user" @click="login">Change user</button>
+        <button class="btn btn-change-user" @click="login">{{$t('Connect SendPulse user')}}</button>
         <p class="small pt-1">
-            * При смене пользователя некоторые автоматизации могут перестать работать. Так как они
-            используют текущего
-            пользоателя для взаимодействия с SendPulse
+            * {{$t('When changing user, some of the automation may stop working.')}}
         </p>
     </div>
 </template>

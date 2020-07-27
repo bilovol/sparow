@@ -58,4 +58,14 @@ class AutomationRepository extends BaseRepository
     {
         return $this->model->where('webhook_id', $webhookId)->count();
     }
+
+    public function deleteByUserId($userId)
+    {
+        return $this->model->where('user_id', $userId)->delete();
+    }
+
+    public function create(array $attributes)
+    {
+        return $this->model->create($attributes);
+    }
 }

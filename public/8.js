@@ -1,13 +1,13 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[8],{
 
-/***/ "./resources/js/lang/es.json":
-/*!***********************************!*\
-  !*** ./resources/js/lang/es.json ***!
-  \***********************************/
+/***/ "./resources/js/lang/zh-CN.json":
+/*!**************************************!*\
+  !*** ./resources/js/lang/zh-CN.json ***!
+  \**************************************/
 /*! exports provided: ok, cancel, error_alert_title, error_alert_text, token_expired_alert_title, token_expired_alert_text, login, register, page_not_found, go_home, logout, email, remember_me, password, forgot_password, confirm_password, name, toggle_navigation, home, you_are_logged_in, reset_password, send_password_reset_link, settings, profile, your_info, info_updated, update, your_password, password_updated, new_password, login_with, register_with, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"ok\":\"De Acuerdo\",\"cancel\":\"Cancelar\",\"error_alert_title\":\"Ha ocurrido un problema\",\"error_alert_text\":\"¡Algo salió mal! Inténtalo de nuevo.\",\"token_expired_alert_title\":\"!Sesión Expirada!\",\"token_expired_alert_text\":\"Por favor inicie sesión de nuevo para continuar.\",\"login\":\"Iniciar Sesión\",\"register\":\"Registro\",\"page_not_found\":\"Página No Encontrada\",\"go_home\":\"Ir a Inicio\",\"logout\":\"Cerrar Sesión\",\"email\":\"Correo Electrónico\",\"remember_me\":\"Recuérdame\",\"password\":\"Contraseña\",\"forgot_password\":\"¿Olvidaste tu contraseña?\",\"confirm_password\":\"Confirmar Contraseña\",\"name\":\"Nombre\",\"toggle_navigation\":\"Cambiar Navegación\",\"home\":\"Inicio\",\"you_are_logged_in\":\"¡Has iniciado sesión!\",\"reset_password\":\"Restablecer la contraseña\",\"send_password_reset_link\":\"Enviar Enlace de Restablecimiento de Contraseña\",\"settings\":\"Configuraciones\",\"profile\":\"Perfil\",\"your_info\":\"Tu Información\",\"info_updated\":\"¡Tu información ha sido actualizada!\",\"update\":\"Actualizar\",\"your_password\":\"Tu Contraseña\",\"password_updated\":\"¡Tu contraseña ha sido actualizada!\",\"new_password\":\"Nueva Contraseña\",\"login_with\":\"Iniciar Sesión con\",\"register_with\":\"Registro con\"}");
+module.exports = JSON.parse("{\"ok\":\"确定\",\"cancel\":\"取消\",\"error_alert_title\":\"错误...\",\"error_alert_text\":\"遇到一些错误，请稍后重试~\",\"token_expired_alert_title\":\"验证过期!\",\"token_expired_alert_text\":\"请稍后重新登录系统\",\"login\":\"登录\",\"register\":\"注册\",\"page_not_found\":\"页面不存在\",\"go_home\":\"返回首页\",\"logout\":\"退出\",\"email\":\"邮箱\",\"remember_me\":\"记住我\",\"password\":\"密码\",\"forgot_password\":\"忘记密码？\",\"confirm_password\":\"重复密码\",\"name\":\"用户名\",\"toggle_navigation\":\"切换导航\",\"home\":\"首页\",\"you_are_logged_in\":\"您已经登录!\",\"reset_password\":\"重置密码\",\"send_password_reset_link\":\"发送重置链接\",\"settings\":\"设置\",\"profile\":\"个人设置\",\"your_info\":\"您的个人信息\",\"info_updated\":\"您的个人信息已经更改!\",\"update\":\"更新\",\"your_password\":\"您的密码\",\"password_updated\":\"您的密码已经更新!\",\"new_password\":\"新密码\",\"login_with\":\"登录\",\"register_with\":\"注册\"}");
 
 /***/ })
 
