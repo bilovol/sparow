@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\Api\Export\StoreRequest;
 use App\Http\Controllers\Controller;
-use Illuminate\Session\Store;
 
 class ExportController extends Controller
 {
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
         return $this->response('store');
     }

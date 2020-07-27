@@ -8,11 +8,12 @@ use App\Repositories\WebhookRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 abstract class DonorBaseService
 {
-    use DonorEvent, DonorCache;
+    use DonorEvent;
 
     protected $repository;
     protected $donorClient;
@@ -148,6 +149,18 @@ abstract class DonorBaseService
 
         return [];
     }
+
+
+    public function getCacheFieldsByObject($object)
+    {
+        return Cache::store(config('donor.cache.storage'))->get($this->donorId . ':' . $object);
+    }
+
+    public function setCacheFieldsByObject($object, $value)
+    {
+        return Cache::store(config('donor.cache.storage'))->set($this->donorId . ':' . $object, $value, config('donor.cache.ttl'));
+    }
+
 
     /**
      * @param $objectKey

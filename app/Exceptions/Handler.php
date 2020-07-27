@@ -5,6 +5,7 @@ namespace App\Exceptions;
 use App\Exceptions\Api\SendPulseService\UnauthorizedException;
 use App\Http\Responses\Api\JsonResponse;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
@@ -41,6 +42,8 @@ class Handler extends ExceptionHandler
      */
     public function report(Throwable $exception)
     {
+        Log::channel('telegram')->error($exception->getFile() . ':' . $exception->getLine() . '|' . $exception->getMessage());
+
         parent::report($exception);
     }
 

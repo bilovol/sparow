@@ -3,10 +3,6 @@
         <!--workflow-->
         <transition name="fade">
             <div>
-                <div class="delimiter">
-                    <eva-icon name="more-vertical-outline"></eva-icon>
-                </div>
-
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex align-items-center pb-2">
@@ -301,13 +297,3 @@
         }
     }
 </script>
-<style>
-    .fade-enter-active, .fade-leave-active {
-        transition: opacity .5s;
-    }
-
-    .fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */
-    {
-        opacity: 0;
-    }
-</style>
