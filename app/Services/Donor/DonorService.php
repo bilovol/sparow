@@ -7,25 +7,6 @@ use Illuminate\Support\Str;
 
 class DonorService extends DonorBaseService
 {
-    public function getDonorIdFromInstallRequest(Request $request)
-    {
-        return $request->donor_id;
-    }
-
-    public function getDonorIdFromLoginRequest(Request $request): string
-    {
-        return $request->donor_id;
-    }
-
-    public function getDonorIdFromUninstallRequest(Request $request): string
-    {
-        return $request->donor_id;
-    }
-
-    public function getDonorClient()
-    {
-        return Str::class;
-    }
 
     public function getObjectDataByKey($objectKey): ?array
     {

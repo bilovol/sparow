@@ -4,6 +4,7 @@ namespace App\Services\Donor;
 
 use App\Http\Requests\Api\Auth\InstallRequest;
 use App\Http\Requests\Api\Auth\LoginRequest;
+use App\Http\Requests\Api\Auth\UninstallRequest;
 use App\Repositories\AutomationRepository;
 use App\Repositories\UserRepository;
 use App\Repositories\WebhookRepository;
@@ -36,9 +37,6 @@ abstract class DonorBaseService
             $this->donorId = Auth::user()->donor_id;
             $this->donorAccess = Auth::user()->donor_access;
             $this->donorInfo = Auth::user()->donor_info;
-
-            $this->donorClient = $this->getDonorClient();
-            $this->getDonorClient();
         }
     }
 
@@ -87,13 +85,13 @@ abstract class DonorBaseService
 
     /**
      *
-     * @param Request $request
+     * @param UninstallRequest $request
      * @return bool
      * @throws \Exception
      */
-    public function uninstall(Request $request)
+    public function uninstall(UninstallRequest $request)
     {
-        $this->donorId = $this->getDonorIdFromUninstallRequest($request);
+        $this->donorId = $request->donor_id;
         $donor = $this->repository->getByDonorId($this->donorId);
 
         $this->donorAccess = $donor->donor_access;
@@ -110,23 +108,6 @@ abstract class DonorBaseService
         (new AutomationRepository())->deleteByUserId($donor->id);
 
         $donor->delete();
-
-        return true;
-    }
-
-    public function deleteWebhooksByUserId($userId)
-    {
-        $webhookRepository = new WebhookRepository();
-        $webhooks = $webhookRepository->getByUserId($userId);
-
-        if (empty($webhooks)) {
-            return true;
-        }
-
-        foreach ($webhooks as $webhook) {
-            $this->unbindWebhookByEvent($webhook->event);
-            $webhook->delete();
-        }
 
         return true;
     }
@@ -172,43 +153,11 @@ abstract class DonorBaseService
      * @throws \Exception
      * @todo return first event object
      */
-    public
-    function getObjectDataByKey($objectKey): ?array
+    public function getObjectDataByKey($objectKey): ?array
     {
         throw new \Exception('getObjectDataByKey() method not resolved');
     }
 
-    /**
-     * @throws \Exception
-     * @todo set $this->donorClient
-     */
-    public
-    function getDonorClient()
-    {
-        throw new \Exception('getDonorClient() method not resolved');
-    }
-
-    /**
-     * @param Request $request
-     * @throws \Exception
-     * @todo return donor id form install request
-     */
-    public
-    function getDonorIdFromInstallRequest(Request $request)
-    {
-        throw new \Exception('getDonorIdFromInstallRequest() method not resolved');
-    }
-
-    /**
-     * @param Request $request
-     * @throws \Exception
-     * @todo return additional donor info from install request
-     */
-    public
-    function getDonorInfoFromInstallRequest(Request $request): ?array
-    {
-        throw new \Exception('getDonorInfoFromInstallRequest() method not resolved');
-    }
 
     /**
      * @param Request $request
@@ -222,29 +171,6 @@ abstract class DonorBaseService
         throw new \Exception('getDonorAccessFromInstallRequest() method not resolved');
     }
 
-    /**
-     * @param Request $request
-     * @return string
-     * @throws \Exception
-     * @todo return donor id from uninstall request
-     */
-    public
-    function getDonorIdFromUninstallRequest(Request $request): string
-    {
-        throw new \Exception('getDonorIdFromUninstallRequest() method not resolved');
-    }
-
-    /**
-     * @param Request $request
-     * @return string
-     * @throws \Exception
-     * @todo return donor id from login request
-     */
-    public
-    function getDonorIdFromLoginRequest(Request $request): string
-    {
-        throw new \Exception('getDonorIdFromLoginRequest() method not resolved');
-    }
 
     /**
      * @param string $event

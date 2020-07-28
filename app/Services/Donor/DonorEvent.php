@@ -35,7 +35,7 @@ trait  DonorEvent
         return config('donor.object_id_mapping.' . $event);
     }
 
-//    //return getObject id by event eky from webhookRequest
+    //return getObject id by event eky from webhookRequest
 //    public function getObjectIdByEventKeyFromWebhookRequest(Request $request, $eventKey)
 //    {
 //        return Arr::get($this->prepareIncomingData($request), self::getObjectIdMappingByEvent($eventKey));

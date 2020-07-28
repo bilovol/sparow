@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\Auth\InstallRequest;
+use App\Http\Requests\Api\Auth\LoginRequest;
 use App\Repositories\UserRepository;
 use App\Services\Donor\DonorService;
 use App\Services\SendPulse\SendPulseService;
@@ -12,7 +14,7 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 class OAuthController extends Controller
 {
 
-    public function install(Request $request, DonorService $donorService)
+    public function install(InstallRequest $request, DonorService $donorService)
     {
         return response()->redirectTo('/')->cookie(
             cookie(
@@ -26,7 +28,7 @@ class OAuthController extends Controller
         );
     }
 
-    public function login(Request $request, DonorService $donorService)
+    public function login(LoginRequest $request, DonorService $donorService)
     {
         return response()->redirectTo('/')->cookie(
             cookie(
@@ -45,9 +47,6 @@ class OAuthController extends Controller
         $donorService->uninstall($request);
 
         return response('deleted');
-        return response()->redirectTo('/')->cookie(
-            cookie('token', '')
-        );
     }
 
 
