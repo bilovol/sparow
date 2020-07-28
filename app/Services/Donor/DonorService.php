@@ -12,19 +12,6 @@ class DonorService extends DonorBaseService
         return $request->donor_id;
     }
 
-    public function getDonorAccessFromInstallRequest(Request $request): array
-    {
-        return [
-            'access_token' => $request->access_token,
-            'refresh_token' => $request->refresh_token,
-        ];
-    }
-
-    public function getDonorInfoFromInstallRequest(Request $request): ?array
-    {
-        return ['domain' => $request->domain];
-    }
-
     public function getDonorIdFromLoginRequest(Request $request): string
     {
         return $request->donor_id;

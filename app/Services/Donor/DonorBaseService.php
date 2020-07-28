@@ -2,6 +2,8 @@
 
 namespace App\Services\Donor;
 
+use App\Http\Requests\Api\Auth\InstallRequest;
+use App\Http\Requests\Api\Auth\LoginRequest;
 use App\Repositories\AutomationRepository;
 use App\Repositories\UserRepository;
 use App\Repositories\WebhookRepository;
@@ -43,16 +45,19 @@ abstract class DonorBaseService
     /**
      * Install and return token
      *
-     * @param Request $request
+     * @param InstallRequest $request
      * @return string
      * @throws \Exception
      * @todo set new connect and return token
      */
-    public function getTokenByInstallRequest(Request $request): string
+    public function getTokenByInstallRequest(InstallRequest $request): string
     {
-        $this->donorId = $this->getDonorIdFromInstallRequest($request);
-        $this->donorAccess = $this->getDonorAccessFromInstallRequest($request);
-        $this->donorInfo = $this->getDonorInfoFromInstallRequest($request);
+        $this->donorId = $request->donor_id;
+        $this->donorAccess = [
+            'access_token' => $request->access_token,
+            'refresh_token' => $request->refresh_token,
+        ];
+        $this->donorInfo = ['domain' => $request->domain];
 
 
         $donor = $this->repository->create([
@@ -67,16 +72,15 @@ abstract class DonorBaseService
     /**
      * Check installation and return token
      *
-     * @param Request $request
+     * @param LoginRequest $request
      * @return string
      * @throws \Exception
+     * @todo check installation and return token
      */
-    public function getTokenByLoginRequest(Request $request): string
+    public function getTokenByLoginRequest(LoginRequest $request): string
     {
-        $this->donorId = $this->getDonorIdFromLoginRequest($request);
+        $this->donorId = $request->donor_id;
         $donor = $this->repository->getByDonorId($this->donorId);
-        $this->donorAccess = $donor->donor_access;
-        $this->donorInfo = $donor->donor_info;
 
         return JWTAuth::fromUser($donor);
     }

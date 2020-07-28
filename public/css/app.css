@@ -10963,6 +10963,16 @@ a.text-dark:focus {
   height: auto;
 }
 
+.theme_light .fade-enter-active,
+.theme_light .fade-leave-active {
+  transition: opacity 0.5s;
+}
+
+.theme_light .fade-enter,
+.theme_light .fade-leave-to {
+  opacity: 0;
+}
+
 .theme_light .btn {
   color: inherit;
   background-color: #fff;
@@ -11301,6 +11311,16 @@ a.text-dark:focus {
 .theme_dark .avatar img {
   width: 100%;
   height: auto;
+}
+
+.theme_dark .fade-enter-active,
+.theme_dark .fade-leave-active {
+  transition: opacity 0.5s;
+}
+
+.theme_dark .fade-enter,
+.theme_dark .fade-leave-to {
+  opacity: 0;
 }
 
 .theme_dark .btn {
