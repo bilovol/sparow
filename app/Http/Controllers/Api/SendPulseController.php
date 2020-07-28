@@ -10,7 +10,6 @@ class SendPulseController extends Controller
 {
     public function listAddressBooks(SendPulseService $sendPulseService)
     {
-//        return $sendPulseService->listAddressBooks();
-        return [['id'=>2, 'name'=>'delete this shit']];
+        return $sendPulseService->listAddressBooks();
     }
 }
