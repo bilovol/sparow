@@ -1,4 +1,4 @@
-build
-css
-js
+build/*
+css/*
+js/*
 *.js
